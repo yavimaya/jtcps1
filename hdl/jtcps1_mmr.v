@@ -90,7 +90,7 @@ module jtcps1_mmr(
 );
 
 // Shift register configuration
-parameter REGSIZE=23; // This is defined at _game level
+parameter REGSIZE=1; // This is defined at _game level
 reg [8*REGSIZE-1:0] regs;
 
 wire [5:1] addr_id,      
@@ -175,7 +175,7 @@ always @(*) begin
     pre_mux1 = 16'hffff;
     if( &addr ) sel=2'b00;
     else begin
-        sel = { |addrb[10:6], |addrb[5:0] };
+        sel = { |addrb[12:6], |addrb[5:0] };
         case( addrb[5:0] )
             6'b000_001: pre_mux0 = {4'd0, cpsb_id[7:4], 4'd0, cpsb_id[3:0]};
             6'b000_010: pre_mux0 = mult1;
@@ -208,8 +208,10 @@ end
     `endif
 `endif
 
-always@(posedge clk) begin
-    if( cfg_we ) begin
+always@(posedge clk) begin : cpsb_config
+    reg last_cfg_we;
+    last_cfg_we <= cfg_we;
+    if( cfg_we && !last_cfg_we ) begin
         regs[7:0] <= cfg_data;
         regs[8*REGSIZE-1:8] <= regs[8*(REGSIZE-1)-1:0];
     end

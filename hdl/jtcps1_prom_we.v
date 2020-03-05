@@ -32,7 +32,7 @@ module jtcps1_prom_we(
     output reg           cfg_we
 );
 
-parameter REGSIZE=23; // This is defined at _game level
+parameter [4:0] REGSIZE=1; // This is defined at _game level
 
 always @(posedge clk) begin
     if ( ioctl_wr && downloading ) begin

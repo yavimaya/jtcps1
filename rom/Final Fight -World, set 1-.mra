@@ -29,7 +29,7 @@
             <part name="ff-1m.3a" crc="0b605e44"  map="00210000"/>
             <part name="ff-3m.5a" crc="52291cd2"  map="21000000"/>
        </interleave>
-       <!-- Mapper for ffight --> 
+       <!-- Mapper for ffight -->        
        <part> FF F3 44 40 07 </part>
        <!-- CPS-B config for ffight --> 
        <part> 00 08 04 02 2A 00 00 32 28 30 26 2E FF FF FF FF 04 20 </part>
